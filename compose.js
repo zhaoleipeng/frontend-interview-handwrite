@@ -12,15 +12,23 @@ function fn3(x) {
 function fn4(x) {
   return x + 4;
 }
+// function compose (...args) {
+//   if (args.length === 1) return args[0];
+//   return args.reduce(
+//     (pre, cur) =>
+//       (...params) => {
+//         console.log('%c 🦀 params: ', 'font-size:20px;background-color: #33A5FF;color:#fff;', params);
+//         return pre(cur(...params))
+//       }
+//   );
+// }
 const a = compose(fn1, fn2, fn3, fn4);
 console.log(a(1)); // 1+4+3+2+1=11
 
 // 实现结果代码
 
-function compose(...fn) {
-  if (!fn.length) return () => {};
-  if (fn.length === 1) return fn[0];
-  return fn.reduce(
-    (pre, cur) =>  (...args1) => pre(cur(...args1))
-  );
+function compose(...args) {
+  // if (args.length === 1) return args[0]
+  return args.reduce((preRes, cur) => (...args) => preRes(cur(...args)) )
+
 }
